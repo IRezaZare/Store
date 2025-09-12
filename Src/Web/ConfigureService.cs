@@ -1,4 +1,4 @@
-﻿using infrastructure.Persistence;
+﻿using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.SeedData;
 using Microsoft.EntityFrameworkCore;
 
