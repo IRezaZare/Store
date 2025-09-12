@@ -4,6 +4,7 @@ using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence;
 
@@ -23,9 +24,9 @@ public class GenericRepository<T> : IGenericRepositry<T> where T : BaseEntity
         return await Task.FromResult(entity);
     }
 
-    public async Task<bool> AnyAcync(Expression<Func<T , bool>> expression , CancellationToken cancellationToken)
+    public async Task<bool> AnyAcync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
     {
-        return await _dbSet.AnyAsync(expression , cancellationToken);
+        return await _dbSet.AnyAsync(expression, cancellationToken);
     }
 
     public async Task<bool> AnyAcync(CancellationToken cancellationToken)
@@ -34,9 +35,11 @@ public class GenericRepository<T> : IGenericRepositry<T> where T : BaseEntity
 
     }
 
-    public void Delete(T entity, CancellationToken cancellationToken)
+    public async Task Delete(T entity, CancellationToken cancellationToken)
     {
-        _dbSet.Remove(entity);
+        var record = await GetByIdAsync(entity.Id, cancellationToken);
+        record.IsDelete = true;
+        await UpdateAsync(entity);
     }
 
     public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
@@ -46,10 +49,10 @@ public class GenericRepository<T> : IGenericRepositry<T> where T : BaseEntity
 
     public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _dbSet.FindAsync(id, cancellationToken);
+        return await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public  Task<T> UpdateAsync(T entity)
+    public Task<T> UpdateAsync(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
         return Task.FromResult(entity);

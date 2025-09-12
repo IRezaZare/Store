@@ -9,7 +9,7 @@ public interface IGenericRepositry<T> where T : BaseEntity
     Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken);
     Task<T> AddAsync(T entity, CancellationToken cancellationToken);
     Task<T> UpdateAsync(T entity);
-    void Delete(T entity, CancellationToken cancellationToken);
+    Task Delete(T entity, CancellationToken cancellationToken);
     Task<bool> AnyAcync(Expression<Func<T, bool>> expression , CancellationToken cancellationToken );
     Task<bool> AnyAcync(CancellationToken cancellationToken);
 }
