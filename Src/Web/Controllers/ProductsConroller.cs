@@ -1,5 +1,4 @@
-﻿using Application.Contracts;
-using Domain.Entities;
+﻿using Application.Features.Products.Queries.GetAll;
 using Microsoft.AspNetCore.Mvc;
 using Web.Common;
 
@@ -7,8 +6,9 @@ namespace Web.Controllers;
 
 public class ProductsConroller : BaseApiController
 {
-    public async Task<IActionResult> Get()
+    [HttpGet]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
-        return Ok();
+        return Ok(await Mediator.Send(new GetAllProductsQuery(),cancellationToken));
     }
 }

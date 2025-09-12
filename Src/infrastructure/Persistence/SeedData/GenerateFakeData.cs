@@ -11,12 +11,6 @@ public class GenerateFakeData
     {
         try
         {
-            if (!await context.Products.AnyAsync())
-            {
-                var products = Products();
-                await context.AddRangeAsync(products);
-                await context.SaveChangesAsync();
-            }
             if (!await context.ProductBrands.AnyAsync())
             {
                 var Brands = ProductBrands();
@@ -27,6 +21,12 @@ public class GenerateFakeData
             {
                 var Types = ProductTypes();
                 await context.AddRangeAsync(Types);
+                await context.SaveChangesAsync();
+            }
+            if (!await context.Products.AnyAsync())
+            {
+                var products = Products();
+                await context.AddRangeAsync(products);
                 await context.SaveChangesAsync();
             }
         }
@@ -155,49 +155,49 @@ public class GenerateFakeData
     }
     private static IEnumerable<ProductBrand> ProductBrands()
     {
-        var ProductBrands = new List<ProductBrand>()
+        var brands = new List<ProductBrand>()
         {
             new()
             {
-                Description=
+                Description =
                     "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate non voluptate. Minim irure ea tempor et mollit aute consectetur. Esse amet commodo ipsum magna. Enim non nostrud minim dolore minim deserunt consequat deserunt deserunt sint amet. Ex aliquip nisi ullamco qui.\r\n",
-                Summary = "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis.",
-                Title ="Brand1",
-
+                Summary =
+                    "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate ",
+                Title = "brand1",
             },
             new()
             {
-                Description=
+                Description =
                     "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate non voluptate. Minim irure ea tempor et mollit aute consectetur. Esse amet commodo ipsum magna. Enim non nostrud minim dolore minim deserunt consequat deserunt deserunt sint amet. Ex aliquip nisi ullamco qui.\r\n",
-                Summary = "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis.",
-                Title ="Brand2",
-
+                Summary =
+                    "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate ",
+                Title = "brand2",
             }
         };
-        return ProductBrands;
+        return brands;
     }
     private static IEnumerable<ProductType> ProductTypes()
     {
-        var ProductTypes = new List<ProductType>()
+        var types = new List<ProductType>()
         {
             new()
             {
-                Description=
+                Description =
                     "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate non voluptate. Minim irure ea tempor et mollit aute consectetur. Esse amet commodo ipsum magna. Enim non nostrud minim dolore minim deserunt consequat deserunt deserunt sint amet. Ex aliquip nisi ullamco qui.\r\n",
-                Summary = "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis.",
-                Title ="Type1",
-
+                Summary =
+                    "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate ",
+                Title = "brand1",
             },
             new()
             {
-                Description=
+                Description =
                     "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate non voluptate. Minim irure ea tempor et mollit aute consectetur. Esse amet commodo ipsum magna. Enim non nostrud minim dolore minim deserunt consequat deserunt deserunt sint amet. Ex aliquip nisi ullamco qui.\r\n",
-                Summary = "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis.",
-                Title ="Type2",
-
+                Summary =
+                    "Fugiat ad culpa ad dolor est tempor esse deserunt amet duis. Amet nulla esse voluptate ",
+                Title = "brand2",
             }
         };
-        return ProductTypes;
+        return types;
     }
 
 }
