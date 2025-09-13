@@ -13,8 +13,12 @@
   <ItemGroup>
     <Folder Include="Dtos\" />
     <Folder Include="Common\" />
+    <Folder Include="Features\ProductBrands\Commands\" />
+    <Folder Include="Features\ProductBrands\Queries\Get\" />
     <Folder Include="Features\Products\Commands\" />
     <Folder Include="Features\Products\Validators\" />
+    <Folder Include="Features\ProductTypes\Commands\" />
+    <Folder Include="Features\ProductTypes\Queries\Get\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
