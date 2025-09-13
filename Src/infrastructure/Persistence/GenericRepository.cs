@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Contracts.Specificationl;
 using Domain.Entities.Base;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,16 @@ public class GenericRepository<T> : IGenericRepositry<T> where T : BaseEntity
     public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+    }
+
+    public Task<T> GetEntityWithSpec(ISpecification<T> spec)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IReadOnlyList<T>> ListAsyncSpec(ISpecification<T> spec)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<T> UpdateAsync(T entity)
