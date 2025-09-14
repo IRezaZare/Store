@@ -11,8 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Common\" />
+    <Folder Include="Dtos\ProductBrands\" />
+    <Folder Include="Dtos\ProductTypes\" />
+    <Folder Include="Dtos\Products\" />
     <Folder Include="Features\ProductBrands\Commands\" />
     <Folder Include="Features\ProductBrands\Queries\Get\" />
     <Folder Include="Features\Products\Commands\" />

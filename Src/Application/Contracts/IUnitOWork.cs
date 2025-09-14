@@ -7,5 +7,5 @@ public interface IUnitOWork
 {
     DbContext context { get; }
     Task<int> Save(CancellationToken cancellationToken);
-    IGenericRepositry<T> Repositry<T>() where T : BaseEntity;
+    IGenericRepositry<T> Repository<T>() where T : BaseEntity;
 }

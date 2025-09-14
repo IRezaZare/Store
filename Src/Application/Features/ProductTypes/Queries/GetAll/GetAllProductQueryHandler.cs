@@ -13,6 +13,6 @@ public class GetAllProductTypeQueryHandler : IRequestHandler<GetAllProductTypeQu
     }
     public async Task<IEnumerable<ProductType>> Handle(GetAllProductTypeQuery request, CancellationToken cancellationToken)
     {
-        return await _uow.Repositry<ProductType>().GetAllAsync(cancellationToken);
+        return await _uow.Repository<ProductType>().GetAllAsync(cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Contracts.Specification;
 using Application.Contracts.Specificationl;
 using Domain.Entities.Base;
 using Infrastructure.Persistence.Context;
@@ -53,19 +54,23 @@ public class GenericRepository<T> : IGenericRepositry<T> where T : BaseEntity
         return await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public Task<T> GetEntityWithSpec(ISpecification<T> spec)
+    public async Task<T> GetEntityWithSpec(ISpecification<T> spec , CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await ApplySpecification(spec).FirstAsync(cancellationToken);
     }
 
-    public Task<IReadOnlyList<T>> ListAsyncSpec(ISpecification<T> spec)
+    public async Task<IReadOnlyList<T>> ListAsyncSpec(ISpecification<T> spec , CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await ApplySpecification(spec).ToListAsync(cancellationToken);
     }
 
     public Task<T> UpdateAsync(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
         return Task.FromResult(entity);
+    }
+    private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+    {
+        return SpecificationEvaluator<T>.GetQuery(_dbSet.AsQueryable(), spec);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Features.Products.Queries.GetAll;
 using Domain.Entities;
 using MediatR;
 
@@ -13,8 +14,10 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, Product>
     }
     public async Task<Product> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        var entity = await _uow.Repositry<Product>().GetByIdAsync(request.Id, cancellationToken);
-        if (entity == null) throw new Exception("error message:");
-        return entity;
+        var spec = new GetProductSpec(request.Id);
+        return await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
+        //var entity = await _uow.Repositry<Product>().GetByIdAsync(request.Id, cancellationToken);
+        //if (entity == null) throw new Exception("error message:");
+        //return entity;
     }
 }

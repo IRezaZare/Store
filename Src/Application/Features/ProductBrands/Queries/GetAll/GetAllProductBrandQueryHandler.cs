@@ -13,6 +13,8 @@ public class GetAllProductBrandQueryHandler : IRequestHandler<GetAllProductBrand
     }
     public async Task<IEnumerable<ProductBrand>> Handle(GetAllProductBrandQuery request, CancellationToken cancellationToken)
     {
-        return await _uow.Repositry<ProductBrand>().GetAllAsync(cancellationToken);
+        var spec = new ProductBrandSpec();
+        return await _uow.Repository<ProductBrand>().ListAsyncSpec(spec, cancellationToken);
+        //return await _uow.Repositry<ProductBrand>().GetAllAsync(cancellationToken);
     }
 }
