@@ -14,7 +14,7 @@ public class UnitOWork : IUnitOWork
     }
     public DbContext context => _context;
 
-    public IGenericRepositry<T> Repositry<T>() where T : BaseEntity
+    public IGenericRepositry<T> Repository<T>() where T : BaseEntity
     {
         return new GenericRepository<T>(_context);
     }

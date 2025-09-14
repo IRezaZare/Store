@@ -4,10 +4,7 @@ namespace Domain.Entities
 {
     public class Product : BaseAuditableEntity, ICommands
     {
-        public Product()
-        {
-            
-        }
+        
         public string Title { get; set; }
         public decimal Price { get; set; }
         public string PictureUrl { get; set; }
