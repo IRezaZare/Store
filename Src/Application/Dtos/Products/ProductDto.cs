@@ -1,4 +1,5 @@
 ﻿using Application.Common.Mapping;
+using Application.Common.Mapping.Resolvers;
 using Application.Dtos.Common;
 using AutoMapper;
 using Domain.Entities;
@@ -21,6 +22,8 @@ public class ProductDto : CommandDto , IMapFrom<Product>
     public void Mapping(Profile profile)
     {
         profile.CreateMap<Product, ProductDto>()
+            .ForMember(x=>x.PictureUrl,
+                c=>c.MapFrom<ProductUrlResolver>())
             .ForMember(x => x.ProductBrand ,c=>c
                 .MapFrom(v =>v.ProductBrand.Title))
             .ForMember(x => x.ProductType, c => c

@@ -8,4 +8,6 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 //build
 var app = builder.Build();
+app.UseStaticFiles();
+
 await app.AddWebAppService().ConfigureAwait(false);
