@@ -3,6 +3,7 @@ using Application.Dtos.Products;
 using Application.Features.Products.Queries.GetAll;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Exceptions;
 using MediatR;
 
 namespace Application.Features.Products.Queries.Get;
@@ -20,9 +21,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDt
     {
         var spec = new GetProductSpec(request.Id);
         var result =  await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
+        if (result == null) throw new NotFoundException();
         return _mapper.Map<ProductDto>(result);
-        //var entity = await _uow.Repositry<Product>().GetByIdAsync(request.Id, cancellationToken);
-        //if (entity == null) throw new Exception("error message:");
-        //return entity;
     }
 }
