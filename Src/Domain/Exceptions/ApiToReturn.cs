@@ -10,12 +10,15 @@ public class ApiToReturn
     public ApiToReturn(string message)
     {
         Message = message;
+        Messages.Add(message);
+
     }
 
     public ApiToReturn(int statusCode, string message)
     {
         StatusCode = statusCode;
         Message = message;
+        Messages.Add(message);
     }
     public ApiToReturn(int statusCode, List<string> messages)
     {
@@ -29,11 +32,12 @@ public class ApiToReturn
         Messages = messages;
         Detail = detail;
     }
-    public ApiToReturn(int statusCode, string message, string detail)
+    public ApiToReturn(int statusCode,List<string> messages, string message, string detail)
     {
         StatusCode = statusCode;
         Detail = detail;
         Message = message;
+        Messages = messages;
     }
 
     public string Message { get; set; }

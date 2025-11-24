@@ -21,7 +21,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDt
     {
         var spec = new GetProductSpec(request.Id);
         var result =  await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
-        if (result == null) throw new NotFoundException();
+        if (result == null) throw new NotFoundEntityException();
         return _mapper.Map<ProductDto>(result);
     }
 }
